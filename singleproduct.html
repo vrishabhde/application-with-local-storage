@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #singleproduct {
+            width: 100%;
+            border: 5px solid red;
+        }
+
+        #sp {
+            width: 50%;
+            height: 600px;
+            border: 1px solid red;
+        }
+
+        #sp>img {
+            width: 100%;
+            height: 75%;
+            border: 1px solid black;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="singleproduct"></div>
+    <script>
+        window.onload = function () {
+            var product = JSON.parse(localStorage.getItem("current_product"));
+
+            var divtoappendproduct = document.getElementById("singleproduct");
+            var structure = `<div id='sp'>
+                <img src=${product.pimage} />
+                <h3>${product.pname}</h3>
+                <h4>${product.pprice}</h4> 
+                <button onclick='addcart(${JSON.stringify(product)})'>Add to Cart</button>
+                </div>`;
+            console.log(structure, "here");
+            divtoappendproduct.innerHTML = structure; 
+
+        }
+        function addcart(product) {
+            // alert("adding to cart"); 
+
+            var currentUser = JSON.parse(localStorage.getItem("currentuser"));
+
+            var data = JSON.parse(localStorage.getItem("user"));
+
+            
+
+            for (var i = 0; i<data.length; i++){
+                if(currentUser.email == data[i].email){
+                    // alert("got");
+                    if(data[i].cartproduct == undefined){
+                        data[i].cartproduct == [product];
+                    }else{
+                        data[i].cartproduct.push(product);
+
+                    }alert("product added to cart");
+                    window.location.href = "./cart.html";
+                }
+            }
+            localStorage.setItem("user", JSON.stringify(data));
+        }
+    </script>
+</body>
+ 
+</html>

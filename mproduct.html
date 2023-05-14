@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="./mproduct.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+    <h1>all products</h1>
+    <div id="practice_product"></div>
+    <script>
+        window.onload = function () {
+
+            var divtoshowproduct = document.getElementById("practice_product");
+
+            var productfromls = JSON.parse(localStorage.getItem("practice_product"));
+            var finaldata = "";
+            // console.log(productfromls, " productfromls");
+
+            for (var i = 0; i < productfromls.length; i++) {
+                // console.log(productfromls);
+                finaldata += `<div onclick = 'redirect(${JSON.stringify(productfromls[i])})' id='sp'>
+                    <img src=${productfromls[i].pimage} />
+                    <h3>${productfromls[i].pname}</h3>
+                    <h4>${productfromls[i].pprice}</h4>
+                    </div>`;
+
+            }
+            // console.log(finaldata, "finaldata here");
+            divtoshowproduct.innerHTML = finaldata;
+        }
+        function redirect(parameter) {
+            var vrushabh = JSON.stringify(parameter);
+            // alert("working");
+            localStorage.setItem("current_product", vrushabh);
+            window.location.href = `./singleproduct.html`;
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>login</title>
+</head>
+
+<body>
+    home
+    <div id="switch">
+        <button onclick="window.location.href='./login.html'">Login</button>
+        <button onclick="window.location.href='./practice.html'">Register</button>
+    </div>
+    <div id="logout"></div>
+
+    <script>
+        window.onload = function () {
+            // alert("working")
+            var currentuser = JSON.parse(localStorage.getItem("currentuser"))
+            // console.log(currentuser,"currentuser");
+            if (!!currentuser) {
+                // alert("current user present")
+                // alert(currentuser.name)
+                var divFromHtml = document.getElementById("switch");
+                var logoutdiv = document.getElementById("logout");
+                // console.log(divFromHtml,"divFromHtml");
+
+                // var h1 = document.createElement("h1");
+                // h1.innerText = "krishnan"
+                // divFromHtml.append(h1)
+                var button = `<button onclick="logout()">logout</button>`;
+                var name = `<h1>${currentuser.name}</h1>`;
+                divFromHtml.innerHTML = name;
+                logoutdiv.innerHTML = button;
+            }else {
+                alert("current user absent");
+            }
+        }
+        function logout() {
+            alert("logout succesful");
+            localStorage.removeItem("currentuser");
+                window.location.reload();
+        }
+
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="practproduct"></div>
+    <script>
+
+        window.onload = function () {
+            var currentUser = JSON.parse(localStorage.getItem("currentuser"));
+            var data = JSON.parse(localStorage.getItem("user"));
+            var divtoappendproduct = document.getElementById("practproduct");
+ 
+            var products;
+            for (var i = 0; i < data.length; i++) {
+                if (currentUser.email == data[i].email) {
+
+                    products = data[i].cartproduct;
+                }
+            }
+            // console.log(currentproducts);
+            var finaldata = "";
+            for (var i = 0; i < products.length; i++) {
+                finaldata += `<div><img src='${products[i].pimage}'/>
+                    </br><h3>${products[i].pname}</h3>
+                    <h4>${products[i].pprice}</h4>
+                    </div>`;
+            }
+            divtoappendproduct.innerHTML = finaldata;
+        }
+    </script>
+</body>
+
+</html>
